@@ -1,0 +1,105 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model occasion {
+  id              Int               @id @default(autoincrement())
+  name            String            @unique(map: "Occasion_name_key")
+  productoccasion productoccasion[]
+}
+
+model order {
+  id           Int          @id @default(autoincrement())
+  customerName String
+  phone        String
+  email        String
+  deliveryType String
+  address      String?
+  city         String?
+  notes        String?
+  total        Decimal      @db.Decimal(10, 2)
+  createdAt    DateTime     @default(now())
+  status       order_status @default(PENDING)
+  userId       Int?
+  user         user?        @relation(fields: [userId], references: [id], map: "Order_userId_fkey")
+  orderitem    orderitem[]
+
+  @@index([userId], map: "Order_userId_fkey")
+}
+
+model orderitem {
+  id        Int     @id @default(autoincrement())
+  orderId   Int
+  productId Int
+  name      String
+  price     Decimal @db.Decimal(10, 2)
+  quantity  Int
+  order     order   @relation(fields: [orderId], references: [id], onDelete: Cascade, map: "OrderItem_orderId_fkey")
+
+  @@index([orderId], map: "OrderItem_orderId_fkey")
+}
+
+model product {
+  id              Int               @id @default(autoincrement())
+  name            String
+  description     String
+  price           Decimal           @db.Decimal(10, 2)
+  image           String
+  category        String
+  featured        Boolean           @default(false)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  productoccasion productoccasion[]
+}
+
+model productoccasion {
+  productId  Int
+  occasionId Int
+  occasion   occasion @relation(fields: [occasionId], references: [id], onDelete: Cascade, map: "ProductOccasion_occasionId_fkey")
+  product    product  @relation(fields: [productId], references: [id], onDelete: Cascade, map: "ProductOccasion_productId_fkey")
+
+  @@id([productId, occasionId])
+  @@index([occasionId], map: "ProductOccasion_occasionId_fkey")
+}
+
+model user {
+  id        Int       @id @default(autoincrement())
+  name      String
+  email     String    @unique(map: "User_email_key")
+  password  String
+  resetToken        String?
+  resetTokenExpiresAt DateTime?
+  role      user_role @default(CUSTOMER)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  order     order[]
+}
+
+model contactmessage {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  subject   String
+  message   String   @db.Text
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum user_role {
+  CUSTOMER
+  ADMIN
+}
+
+enum order_status {
+  PENDING
+  CONFIRMED
+  PREPARING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}

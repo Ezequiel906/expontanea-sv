@@ -1,0 +1,109 @@
+.public-feedback {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 34px 28px;
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow);
+  animation: public-feedback-enter 0.22s ease-out;
+}
+
+.public-feedback-icon {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--color-accent-light);
+  color: var(--color-primary);
+}
+
+.public-feedback-loading .public-feedback-icon svg {
+  animation: public-feedback-spin 0.9s linear infinite;
+}
+
+.public-feedback-error {
+  border-color: rgba(185, 28, 28, 0.22);
+}
+
+.public-feedback-error .public-feedback-icon {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.public-feedback-content h2 {
+  margin: 0;
+  font-family: var(--font-heading);
+  color: var(--color-text);
+  font-size: 30px;
+  line-height: 1.05;
+}
+
+.public-feedback-content p {
+  max-width: 520px;
+  margin: 8px 0 0;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.public-feedback-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.public-feedback-actions a,
+.public-feedback-actions button {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-primary);
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@keyframes public-feedback-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes public-feedback-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 640px) {
+  .public-feedback {
+    flex-direction: column;
+    padding: 28px 22px;
+  }
+
+  .public-feedback-content h2 {
+    font-size: 26px;
+  }
+}

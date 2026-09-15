@@ -1,0 +1,131 @@
+.admin-dashboard {
+  max-width: 1400px;
+}
+
+.admin-dashboard-header {
+  margin-bottom: 28px;
+}
+
+.admin-dashboard-header h1 {
+  margin: 0;
+  font-size: 28px;
+  color: var(--color-text);
+}
+
+.admin-dashboard-header p {
+  margin: 6px 0 0;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+}
+
+.admin-dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.admin-stat-card {
+  padding: 22px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.admin-stat-card span {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+}
+
+.admin-stat-card strong {
+  display: block;
+  color: var(--color-text);
+  font-size: 28px;
+  font-weight: 600;
+}
+
+@media (max-width: 1000px) {
+  .admin-dashboard-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .admin-dashboard-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+.admin-recent-orders {
+  margin-top: 28px;
+  padding: 24px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.admin-recent-orders-header {
+  margin-bottom: 20px;
+}
+
+.admin-recent-orders-header h2 {
+  margin: 0;
+  font-size: 17px;
+  color: var(--color-text);
+}
+
+.admin-recent-orders-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-recent-order {
+  display: grid;
+  grid-template-columns: 1fr 120px 140px;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.admin-recent-order:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.admin-recent-order:first-child {
+  padding-top: 0;
+}
+
+.admin-recent-order > div {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.admin-recent-order > div strong {
+  font-size: 14px;
+  color: var(--color-text);
+}
+
+.admin-recent-order > div span {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+
+.admin-recent-order > span {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+@media (max-width: 600px) {
+  .admin-recent-order {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .admin-recent-order > div {
+    justify-content: space-between;
+  }
+}

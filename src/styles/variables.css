@@ -1,0 +1,31 @@
+:root {
+  /* Colors */
+  --color-primary: #5f7355;
+  --color-primary-dark: #46583f;
+
+  --color-accent: #c98f8f;
+  --color-accent-light: #f2dddd;
+
+  --color-background: #f8f6f1;
+  --color-surface: #ffffff;
+
+  --color-text: #2f332d;
+  --color-text-secondary: #6f746b;
+  --color-border: #e5e2da;
+
+  /* Typography */
+  --font-heading: "Cormorant Garamond", serif;
+  --font-body: "Inter", sans-serif;
+
+  /* Border radius */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+
+  /* Layout */
+  --container-width: 1200px;
+}
