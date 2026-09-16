@@ -8,8 +8,10 @@ datasource db {
 
 model occasion {
   id              Int               @id @default(autoincrement())
-  name            String            @unique(map: "Occasion_name_key")
+  name            String            @unique
   productoccasion productoccasion[]
+
+  @@map("Occasion")
 }
 
 model order {
@@ -29,6 +31,7 @@ model order {
   orderitem    orderitem[]
 
   @@index([userId], map: "Order_userId_fkey")
+  @@map("Order")
 }
 
 model orderitem {
@@ -41,6 +44,7 @@ model orderitem {
   order     order   @relation(fields: [orderId], references: [id], onDelete: Cascade, map: "OrderItem_orderId_fkey")
 
   @@index([orderId], map: "OrderItem_orderId_fkey")
+  @@map("OrderItem")
 }
 
 model product {
@@ -54,6 +58,8 @@ model product {
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
   productoccasion productoccasion[]
+
+  @@map("Product")
 }
 
 model productoccasion {
@@ -64,19 +70,22 @@ model productoccasion {
 
   @@id([productId, occasionId])
   @@index([occasionId], map: "ProductOccasion_occasionId_fkey")
+  @@map("ProductOccasion")
 }
 
 model user {
-  id        Int       @id @default(autoincrement())
-  name      String
-  email     String    @unique(map: "User_email_key")
-  password  String
-  resetToken        String?
+  id                  Int       @id @default(autoincrement())
+  name                String
+  email               String    @unique
+  password            String
+  role                user_role @default(CUSTOMER)
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  resetToken          String?
   resetTokenExpiresAt DateTime?
-  role      user_role @default(CUSTOMER)
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  order     order[]
+  order               order[]
+
+  @@map("User")
 }
 
 model contactmessage {
