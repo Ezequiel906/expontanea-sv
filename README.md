@@ -4,7 +4,25 @@
 
 El proyecto incluye una experiencia completa de compra para clientes y un panel administrativo para gestionar productos, pedidos y clientes. También integra servicios externos para almacenamiento de imágenes y envío de correos.
 
-Demo: https://expontanea-sv-one.vercel.app
+## Demo
+
+### Sitio web
+
+https://expontanea-sv-one.vercel.app/
+
+### Panel administrativo
+
+https://expontanea-sv-one.vercel.app/admin/login
+
+Credenciales de demostración:
+
+```text
+Email: admin@expontanea.com
+Contraseña: Admin1234
+```
+
+Estas credenciales permiten probar las funcionalidades del panel administrativo del proyecto.
+
 API: https://expontanea-sv.onrender.com/api/health
 
 ---
