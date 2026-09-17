@@ -3,10 +3,29 @@ import CategoryCard from "../../components/CategoryCard/CategoryCard";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import ProductCard from "../../components/ProductCard/ProductCard";
-import { products } from "../../data/products";
+import { useEffect, useState } from "react";
+import type { Product } from "../../types/product";
+import { getProducts } from "../../services/productService";
 import Ocassions from "../../components/Ocassions/Ocassions";
 
 function Home() {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const data = await getProducts();
+        setProducts(data);
+      } catch (error) {
+        console.error("Error al cargar productos destacados:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProducts();
+  }, []);
   return (
     <div className="home">
       <section className="hero">
@@ -104,12 +123,16 @@ function Home() {
           </div>
 
           <div className="products-grid">
-            {products
-              .filter((product) => product.featured)
-              .slice(0, 4)
-              .map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
+            {loading ? (
+              <p>Cargando productos...</p>
+            ) : (
+              products
+                .filter((product) => product.featured)
+                .slice(0, 4)
+                .map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))
+            )}
           </div>
         </div>
       </section>
