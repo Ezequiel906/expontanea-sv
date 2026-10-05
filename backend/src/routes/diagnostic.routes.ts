@@ -69,7 +69,7 @@ const createMysqlConnection = () => {
     user: decodeURIComponent(databaseUrl.username),
     password: decodeURIComponent(databaseUrl.password),
     database: databaseUrl.pathname.slice(1),
-    ssl: usesTls ? { rejectUnauthorized: true } : undefined,
+    ssl: usesTls ? { rejectUnauthorized: false } : undefined,
     connectTimeout: CONNECTION_TIMEOUT_MS,
   });
 };
