@@ -7,6 +7,7 @@ import authRoutes from "./routes/auth.routes";
 import dashboardRoutes from "./routes/dashboard.routes";
 import occasionRoutes from "./routes/occasion.routes";
 import contactRoutes from "./routes/contact.routes";
+import diagnosticRoutes from "./routes/diagnostic.routes";
 
 const app = express();
 const PORT = Number(process.env.PORT) || 3000;
@@ -36,6 +37,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/occasions", occasionRoutes);
 app.use("/api/contact", contactRoutes);
+app.use("/api/diagnostic", diagnosticRoutes);
 
 app.get("/api/health", (_req, res) => {
   res.json({
