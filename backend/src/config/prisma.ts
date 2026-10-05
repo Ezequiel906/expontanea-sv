@@ -1,9 +1,22 @@
 import "dotenv/config";
+import fs from "node:fs";
 
 import { PrismaClient } from "@prisma/client";
 import { PrismaMariaDb } from "@prisma/adapter-mariadb";
 
-const adapter = new PrismaMariaDb(process.env.DATABASE_URL!);
+const databaseUrl = new URL(process.env.DATABASE_URL!);
+
+const adapter = new PrismaMariaDb({
+  host: databaseUrl.hostname,
+  port: Number(databaseUrl.port || 3306),
+  user: decodeURIComponent(databaseUrl.username),
+  password: decodeURIComponent(databaseUrl.password),
+  database: databaseUrl.pathname.slice(1),
+  ssl: {
+    ca: fs.readFileSync(process.env.AIVEN_CA_CERT_PATH!, "utf8"),
+    rejectUnauthorized: true,
+  },
+});
 
 export const prisma = new PrismaClient({
   adapter,
